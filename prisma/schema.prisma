@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  category    String    // "Cuts", "Beard", "Kids", "Specials", "Add-ons"
+  price       Float
+  duration    Int       // minutes
+  image       String?
+  active      Boolean   @default(true)
+  bookings    Booking[]
+}
+
+model Booking {
+  id          String   @id @default(cuid())
+  clientName  String
+  clientEmail String
+  clientPhone String
+  serviceId   String
+  service     Service  @relation(fields: [serviceId], references: [id])
+  date        DateTime
+  startTime   String   // "10:00"
+  endTime     String   // "10:30"
+  status      String   @default("confirmed") // confirmed, cancelled, completed, no-show
+  notes       String?
+  deposit     Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  review      Review?
+}
+
+model BlockedSlot {
+  id        String   @id @default(cuid())
+  date      DateTime
+  startTime String
+  endTime   String
+  reason    String?  // "lunch", "holiday", "personal"
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  rating    Int      // 1-5
+  comment   String?
+  createdAt DateTime @default(now())
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  url       String
+  caption   String?
+  category  String?  // "fades", "beards", "lineups", "kids"
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model LoyaltyVisit {
+  id          String   @id @default(cuid())
+  clientPhone String
+  visitDate   DateTime @default(now())
+  redeemed    Boolean  @default(false)
+}
+
+model Settings {
+  id              String @id @default("default")
+  shopName        String @default("Timz Trimz")
+  openTime        String @default("09:00")
+  closeTime       String @default("19:00")
+  slotInterval    Int    @default(30) // minutes
+  daysOff         String @default("Sunday") // comma-separated
+  depositRequired Float  @default(0)
+}
