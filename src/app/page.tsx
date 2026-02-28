@@ -64,13 +64,12 @@ export default async function Home() {
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 px-4 text-center">
           <h1 className="font-display text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-            YOUR CUT.
+            WHERE PRESENCE
             <br />
-            YOUR STYLE.
+            MEETS PERFORMANCE
           </h1>
           <p className="mx-auto mt-6 max-w-lg text-lg text-white/70">
-            Premium cuts and sharp fades in Whinchmore Hill. Where every visit
-            feels like a fresh start.
+            Skin Fades &bull; Tapers &bull; Grooming for the Elite
           </p>
           <Link
             href="/book"
@@ -89,7 +88,7 @@ export default async function Home() {
               Services
             </h2>
             <p className="mt-3 text-warm-grey">
-              Fresh cuts, sharp fades, and proper grooming.
+              Skin fades, tapers, SMP and grooming for the elite.
             </p>
           </div>
 
@@ -161,15 +160,15 @@ export default async function Home() {
                 Meet Tim
               </h2>
               <p className="mt-6 text-base leading-relaxed text-warm-grey">
-                Tim has been cutting hair in Whinchmore Hill for over a decade.
-                What started as a passion turned into a craft, and that craft
-                turned into the go-to barbershop in North London.
+                Tim is a multi-award-winning barber and SMP artist based in
+                Winchmore Hill. With over 15 years behind the chair, he&apos;s
+                built a referral-only reputation for precision skin fades,
+                tapers, and scalp micropigmentation.
               </p>
               <p className="mt-4 text-base leading-relaxed text-warm-grey">
-                From skin fades to scissor cuts, every client gets Tim&apos;s
-                full attention and a cut that fits their style. No rush, no
-                assembly line &mdash; just proper barbering with a personal
-                touch.
+                From his academy training the next generation to his 5-star
+                rated chair, Tim delivers an elite grooming experience &mdash;
+                no shortcuts, no compromises.
               </p>
               <Link
                 href="/about"
@@ -191,7 +190,7 @@ export default async function Home() {
               Recent Work
             </h2>
             <p className="mt-3 text-warm-grey">
-              See what walks out the door at Timz Trimz.
+              Fades, lineups, beards and SMP from the chair.
             </p>
           </div>
 
@@ -353,9 +352,9 @@ export default async function Home() {
                       Address
                     </h3>
                     <p className="mt-1 text-sm text-warm-grey">
-                      Whinchmore Hill
+                      8 Avenue Parade, Winchmore Hill
                       <br />
-                      London, N21
+                      Enfield, N21 2AX
                     </p>
                   </div>
                 </div>

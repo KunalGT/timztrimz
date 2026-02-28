@@ -1,6 +1,6 @@
 "use client";
 
-const CATEGORIES = ["Cuts", "Beard", "Kids", "Specials", "Add-ons"];
+const CATEGORIES = ["Cuts", "Beard", "Kids", "Specials", "Add-ons", "SMP"];
 
 interface ServiceTabsProps {
   active: string;

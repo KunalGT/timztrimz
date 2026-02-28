@@ -32,12 +32,12 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
-              Whinchmore Hill&apos;s go-to barber. Premium cuts, sharp fades,
-              and a proper grooming experience.
+              Where Presence Meets Performance. Skin fades, tapers, SMP
+              and grooming for the elite.
             </p>
             <div className="mt-6 flex gap-4">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/timztrimz_barber"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-10 w-10 items-center justify-center rounded-sm bg-white/10 text-white/70 transition-colors hover:bg-gold hover:text-black"
@@ -111,9 +111,9 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-gold" />
                 <span className="text-sm text-white/60">
-                  Whinchmore Hill
+                  8 Avenue Parade, Winchmore Hill
                   <br />
-                  London, N21
+                  Enfield, N21 2AX
                 </span>
               </li>
               <li className="flex items-center gap-3">

@@ -30,6 +30,10 @@ async function main() {
     prisma.service.create({ data: { name: "Hair Wash", description: "Refreshing hair wash with premium products.", category: "Add-ons", price: 5, duration: 10, image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&q=80" } }),
     prisma.service.create({ data: { name: "Eyebrow Trim", description: "Clean up those brows for a polished look.", category: "Add-ons", price: 5, duration: 5, image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&q=80" } }),
     prisma.service.create({ data: { name: "Hair Design / Pattern", description: "Custom hair design or pattern cut into your style.", category: "Add-ons", price: 10, duration: 15, image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400&q=80" } }),
+    prisma.service.create({ data: { name: "SMP Consultation", description: "Free consultation to assess suitability, discuss expectations, and plan your scalp micropigmentation treatment.", category: "SMP", price: 0, duration: 30, image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&q=80" } }),
+    prisma.service.create({ data: { name: "SMP Session 1", description: "First scalp micropigmentation session — laying the foundation for a natural, fuller-looking hairline.", category: "SMP", price: 250, duration: 180, image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&q=80" } }),
+    prisma.service.create({ data: { name: "SMP Session 2", description: "Follow-up session to build density and refine the hairline for a seamless finish.", category: "SMP", price: 200, duration: 150, image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&q=80" } }),
+    prisma.service.create({ data: { name: "SMP Touch-Up", description: "Maintenance touch-up to keep your scalp micropigmentation looking fresh and sharp.", category: "SMP", price: 150, duration: 120, image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&q=80" } }),
   ]);
 
   const galleryImages = [
@@ -53,6 +57,9 @@ async function main() {
     { url: "https://images.unsplash.com/photo-1612257416648-ee7a6c5b1e4b?w=600&q=80", caption: "Drop fade", category: "fades", featured: false },
     { url: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80", caption: "Beard goals", category: "beards", featured: false },
     { url: "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=600&q=80", caption: "Kids style", category: "kids", featured: false },
+    { url: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80", caption: "SMP hairline restoration", category: "smp", featured: true },
+    { url: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80", caption: "Scalp micropigmentation detail", category: "smp", featured: false },
+    { url: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80", caption: "SMP density work", category: "smp", featured: false },
   ];
   for (const img of galleryImages) await prisma.galleryImage.create({ data: img });
 

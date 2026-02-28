@@ -11,7 +11,7 @@ model Service {
   id          String    @id @default(cuid())
   name        String
   description String?
-  category    String    // "Cuts", "Beard", "Kids", "Specials", "Add-ons"
+  category    String    // "Cuts", "Beard", "Kids", "Specials", "Add-ons", "SMP"
   price       Float
   duration    Int       // minutes
   image       String?
@@ -58,7 +58,7 @@ model GalleryImage {
   id        String   @id @default(cuid())
   url       String
   caption   String?
-  category  String?  // "fades", "beards", "lineups", "kids"
+  category  String?  // "fades", "beards", "lineups", "kids", "smp"
   featured  Boolean  @default(false)
   createdAt DateTime @default(now())
 }

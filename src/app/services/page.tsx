@@ -4,7 +4,7 @@ import ServicesList from "./ServicesList";
 export const metadata = {
   title: "Our Services | Timz Trimz",
   description:
-    "Browse our full range of barber services — cuts, fades, beard trims, kids cuts and more.",
+    "Browse our full range of services — skin fades, tapers, beard trims, SMP and more. Grooming for the elite.",
 };
 
 export default async function ServicesPage() {
@@ -20,7 +20,7 @@ export default async function ServicesPage() {
           Our Services
         </h1>
         <p className="text-warm-grey mb-8">
-          Premium cuts and grooming at honest prices.
+          Skin fades, tapers, SMP and grooming for the elite.
         </p>
         <ServicesList services={services} />
       </div>

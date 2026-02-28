@@ -37,20 +37,20 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-warm-grey leading-relaxed mb-4">
-              Tim started cutting hair at 16, learning the craft from his uncle&apos;s
-              barbershop in Edmonton. After training in Shoreditch and working
-              alongside some of London&apos;s best barbers, he opened Timz Trimz to
-              serve his local community in Whinchmore Hill.
+              Tim is a multi-award-winning barber and certified SMP (Scalp
+              Micropigmentation) artist based in Winchmore Hill. With over 15
+              years behind the chair, he&apos;s built a referral-only reputation
+              for precision skin fades, tapers, and hairline restoration.
             </p>
             <p className="text-warm-grey leading-relaxed mb-4">
-              He believes every man deserves a fresh cut that makes them feel
-              confident. Whether it&apos;s a skin fade, a scissor cut, or getting
-              wedding-ready, Tim treats every client like family.
+              Beyond the chair, Tim runs a barber academy training the next
+              generation of elite barbers. His 5-star rated service and
+              word-of-mouth client base stretches across North London and beyond.
             </p>
             <p className="text-warm-grey leading-relaxed">
-              With over 15 years of experience and a loyal client base that
-              stretches across North London, Tim&apos;s chair is where you go to look
-              and feel your best.
+              Whether it&apos;s a signature skin fade, a scalp micropigmentation
+              treatment, or getting wedding-ready, Tim delivers an experience
+              &mdash; not just a haircut.
             </p>
           </div>
         </div>
@@ -65,13 +65,14 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
               <p className="text-warm-grey leading-relaxed mb-4">
-                Timz Trimz is more than a barbershop &mdash; it&apos;s a space where
-                you can relax, catch up, and leave feeling sharp. Premium service
-                in a chilled-out environment.
+                Timz Trimz is more than a barbershop &mdash; it&apos;s a referral-only
+                studio where presence meets performance. Premium grooming,
+                scalp micropigmentation, and an academy for upcoming barbers,
+                all under one roof.
               </p>
               <p className="text-warm-grey leading-relaxed">
                 Good music, good conversation, and a cut that speaks for itself.
-                No gimmicks, no inflated prices &mdash; just honest grooming done
+                No gimmicks, no inflated prices &mdash; just elite grooming done
                 right.
               </p>
             </div>
@@ -126,7 +127,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <p className="text-warm-grey mb-4">
-              123 Green Lanes, Whinchmore Hill, London N21 3RS
+              8 Avenue Parade, Winchmore Hill, Enfield, N21 2AX
             </p>
             <div className="aspect-[4/3] rounded-xl bg-gray-100 flex items-center justify-center text-warm-grey text-sm">
               <div className="text-center">

@@ -5,7 +5,7 @@ import { Instagram } from "lucide-react";
 export const metadata = {
   title: "Our Work | Timz Trimz",
   description:
-    "Check out our latest cuts, fades, beards and lineups. See why Timz Trimz is Whinchmore Hill's go-to barber.",
+    "Check out our latest fades, lineups, beards and SMP work. See why Timz Trimz is Winchmore Hill's go-to barber.",
 };
 
 export default async function GalleryPage() {
@@ -31,7 +31,7 @@ export default async function GalleryPage() {
             <Instagram size={24} className="text-gold" />
             <div>
               <p className="font-semibold text-black">Follow us on Instagram</p>
-              <p className="text-sm text-warm-grey">@timztrimz</p>
+              <p className="text-sm text-warm-grey">@timztrimz_barber</p>
             </div>
           </div>
         </div>

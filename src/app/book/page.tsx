@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Book Now | Timz Trimz",
   description:
-    "Book your next haircut with Tim. Choose from skin fades, scissor cuts, beard trims and more.",
+    "Book your next appointment with Tim. Skin fades, tapers, SMP, beard trims and more.",
 };
 
 export default function BookPage() {

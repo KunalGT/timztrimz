@@ -13,9 +13,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Timz Trimz | Premium Barbershop in Whinchmore Hill",
+  title: "Timz Trimz | Premium Barbershop in Winchmore Hill",
   description:
-    "Book your next haircut with Tim. Skin fades, scissor cuts, beard trims and more. Whinchmore Hill's go-to barber.",
+    "Where Presence Meets Performance. Skin fades, tapers, SMP and grooming for the elite. Winchmore Hill's go-to barber.",
 };
 
 export default function RootLayout({

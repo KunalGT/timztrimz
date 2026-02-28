@@ -11,7 +11,7 @@ type GalleryImage = {
   category: string | null;
 };
 
-const TABS = ["All", "Fades", "Beards", "Lineups", "Kids"] as const;
+const TABS = ["All", "Fades", "Beards", "Lineups", "Kids", "SMP"] as const;
 
 export default function GalleryGrid({ images }: { images: GalleryImage[] }) {
   const [activeTab, setActiveTab] = useState<string>("All");

@@ -15,7 +15,7 @@ type Service = {
   image: string | null;
 };
 
-const CATEGORIES = ["All", "Cuts", "Beard", "Kids", "Specials", "Add-ons"] as const;
+const CATEGORIES = ["All", "Cuts", "Beard", "Kids", "Specials", "Add-ons", "SMP"] as const;
 
 export default function ServicesList({ services }: { services: Service[] }) {
   const [activeTab, setActiveTab] = useState<string>("All");
