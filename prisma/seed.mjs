@@ -51,7 +51,7 @@ async function main() {
     { url: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80", caption: "Styled finish", category: "fades", featured: true },
     { url: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?w=600&q=80", caption: "Low fade", category: "fades", featured: false },
     { url: "https://images.unsplash.com/photo-1612257416648-ee7a6c5b1e4b?w=600&q=80", caption: "Drop fade", category: "fades", featured: false },
-    { url: "https://images.unsplash.com/photo-1484291150605-0860ed671425?w=600&q=80", caption: "Beard goals", category: "beards", featured: false },
+    { url: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80", caption: "Beard goals", category: "beards", featured: false },
     { url: "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=600&q=80", caption: "Kids style", category: "kids", featured: false },
   ];
   for (const img of galleryImages) await prisma.galleryImage.create({ data: img });
