@@ -17,6 +17,10 @@ import {
   Menu,
   X,
   LogOut,
+  Users,
+  Package,
+  ListOrdered,
+  TrendingUp,
 } from "lucide-react";
 
 const navItems = [
@@ -24,9 +28,13 @@ const navItems = [
   { href: "/admin/bookings", label: "Bookings", icon: CalendarDays },
   { href: "/admin/calendar", label: "Calendar", icon: CalendarClock },
   { href: "/admin/block-time", label: "Block Time", icon: Clock },
+  { href: "/admin/barbers", label: "Barbers", icon: Users },
   { href: "/admin/services", label: "Services", icon: Scissors },
+  { href: "/admin/products", label: "Products", icon: Package },
+  { href: "/admin/waitlist", label: "Waitlist", icon: ListOrdered },
   { href: "/admin/gallery", label: "Gallery", icon: Image },
   { href: "/admin/reviews", label: "Reviews", icon: Star },
+  { href: "/admin/analytics", label: "Analytics", icon: TrendingUp },
   { href: "/admin/earnings", label: "Earnings", icon: DollarSign },
   { href: "/admin/loyalty", label: "Loyalty", icon: Heart },
   { href: "/admin/settings", label: "Settings", icon: Settings },

@@ -14,6 +14,8 @@ interface Booking {
   endTime: string;
   status: string;
   notes: string | null;
+  deposit: number | null;
+  depositPaid: boolean;
   service: { name: string; price: number };
 }
 
@@ -45,6 +47,7 @@ export default function BookingsPage() {
   };
 
   const statusColors: Record<string, string> = {
+    pending_payment: "bg-yellow-100 text-yellow-700",
     confirmed: "bg-success/10 text-success",
     completed: "bg-blue-100 text-blue-700",
     cancelled: "bg-danger/10 text-danger",
@@ -64,6 +67,7 @@ export default function BookingsPage() {
             className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold"
           >
             <option value="all">All Statuses</option>
+            <option value="pending_payment">Pending Payment</option>
             <option value="confirmed">Confirmed</option>
             <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
@@ -96,6 +100,9 @@ export default function BookingsPage() {
                   Service
                 </th>
                 <th className="text-left p-4 text-warm-grey font-medium">
+                  Deposit
+                </th>
+                <th className="text-left p-4 text-warm-grey font-medium">
                   Status
                 </th>
                 <th className="text-left p-4 text-warm-grey font-medium">
@@ -122,6 +129,21 @@ export default function BookingsPage() {
                     </div>
                   </td>
                   <td className="p-4 text-black">{booking.service.name}</td>
+                  <td className="p-4">
+                    {booking.deposit ? (
+                      <span
+                        className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                          booking.depositPaid
+                            ? "bg-success/10 text-success"
+                            : "bg-yellow-100 text-yellow-700"
+                        }`}
+                      >
+                        {booking.depositPaid ? "Paid" : "Pending"} &pound;{booking.deposit.toFixed(2)}
+                      </span>
+                    ) : (
+                      <span className="text-xs text-warm-grey">—</span>
+                    )}
+                  </td>
                   <td className="p-4">
                     <span
                       className={`px-2.5 py-1 rounded-full text-xs font-medium ${statusColors[booking.status] || ""}`}

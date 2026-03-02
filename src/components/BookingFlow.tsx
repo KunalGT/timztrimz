@@ -6,6 +6,7 @@ import {
   Calendar,
   User,
   CheckCircle2,
+  CreditCard,
   ArrowLeft,
   ArrowRight,
   Clock,
@@ -14,6 +15,7 @@ import {
 import ServiceTabs from "./ServiceTabs";
 import ServiceCard from "./ServiceCard";
 import BookingCalendar from "./BookingCalendar";
+import DepositPayment from "./DepositPayment";
 
 interface Service {
   id: string;
@@ -32,6 +34,8 @@ interface BookingResult {
   startTime: string;
   endTime: string;
   service: Service;
+  depositRequired?: boolean;
+  depositAmount?: number;
 }
 
 const STEPS = [
@@ -115,7 +119,14 @@ export default function BookingFlow() {
       }
 
       setBooking(data);
-      setStep(4);
+
+      if (data.depositRequired) {
+        // Go to payment step
+        setStep(4);
+      } else {
+        // Skip payment, go to success
+        setStep(5);
+      }
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
@@ -388,8 +399,33 @@ export default function BookingFlow() {
         </div>
       )}
 
-      {/* Step 5: Success */}
-      {step === 4 && booking && (
+      {/* Step 5: Payment (if deposit required) */}
+      {step === 4 && booking && booking.depositRequired && (
+        <div className="space-y-5">
+          <div>
+            <h2 className="font-display text-2xl font-bold text-black">
+              Pay deposit
+            </h2>
+            <p className="mt-1 text-sm text-warm-grey">
+              A &pound;{booking.depositAmount?.toFixed(2)} deposit is required to secure your booking
+            </p>
+          </div>
+          <DepositPayment
+            bookingId={booking.id}
+            amount={booking.depositAmount || 0}
+            onSuccess={() => setStep(5)}
+            onError={(msg) => setError(msg)}
+          />
+          {error && (
+            <div className="rounded-lg bg-danger/10 px-4 py-3 text-sm text-danger">
+              {error}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Step 6: Success */}
+      {step === 5 && booking && (
         <div className="py-8 text-center space-y-6">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-success/10">
             <CheckCircle2 className="h-10 w-10 text-success" />

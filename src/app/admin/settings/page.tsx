@@ -173,6 +173,37 @@ export default function SettingsPage() {
           )}
         </div>
       </form>
+
+      {/* Google Calendar Sync */}
+      <div className="bg-white rounded-xl border border-gray-100 p-6 max-w-2xl">
+        <h2 className="font-medium text-black mb-4 flex items-center gap-2">
+          <SettingsIcon size={18} className="text-gold" />
+          Google Calendar Sync
+        </h2>
+        <p className="text-sm text-warm-grey mb-4">
+          Subscribe to your booking calendar in Google Calendar using the ICS feed URL below.
+          Copy this URL and add it as a calendar subscription in Google Calendar.
+        </p>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            readOnly
+            value={`${typeof window !== "undefined" ? window.location.origin : ""}/api/admin/calendar-sync?token=${settings?.id === "default" ? "1234" : ""}`}
+            className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50 text-warm-grey"
+          />
+          <button
+            onClick={() => {
+              const url = `${window.location.origin}/api/admin/calendar-sync?token=1234`;
+              navigator.clipboard.writeText(url);
+              setSaved(true);
+              setTimeout(() => setSaved(false), 2000);
+            }}
+            className="px-4 py-2 bg-gold text-black text-sm font-semibold rounded-lg hover:bg-gold-light"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

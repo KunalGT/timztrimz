@@ -45,87 +45,106 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const { clientName, clientEmail, clientPhone, serviceId, date, startTime, notes } = body;
+  try {
+    const body = await request.json();
+    const { clientName, clientEmail, clientPhone, serviceId, date, startTime, notes, barberId } = body;
 
-  // Validate required fields
-  if (!clientName || !clientEmail || !clientPhone || !serviceId || !date || !startTime) {
-    return NextResponse.json(
-      { error: "Missing required fields: clientName, clientEmail, clientPhone, serviceId, date, startTime" },
-      { status: 400 }
-    );
-  }
+    // Validate required fields
+    if (!clientName || !clientEmail || !clientPhone || !serviceId || !date || !startTime) {
+      return NextResponse.json(
+        { error: "Missing required fields: clientName, clientEmail, clientPhone, serviceId, date, startTime" },
+        { status: 400 }
+      );
+    }
 
-  // Get service to determine duration
-  const service = await prisma.service.findUnique({ where: { id: serviceId } });
-  if (!service) {
-    return NextResponse.json({ error: "Service not found" }, { status: 404 });
-  }
+    // Get service to determine duration
+    const service = await prisma.service.findUnique({ where: { id: serviceId } });
+    if (!service) {
+      return NextResponse.json({ error: "Service not found" }, { status: 404 });
+    }
 
-  // Calculate end time
-  const startMinutes = timeToMinutes(startTime);
-  const endMinutes = startMinutes + service.duration;
-  const endTime = minutesToTime(endMinutes);
+    // Calculate end time
+    const startMinutes = timeToMinutes(startTime);
+    const endMinutes = startMinutes + service.duration;
+    const endTime = minutesToTime(endMinutes);
 
-  // Check for conflicts with existing confirmed bookings
-  const dayStart = new Date(date + "T00:00:00");
-  const dayEnd = new Date(date + "T23:59:59");
+    // Check for conflicts with existing confirmed bookings
+    const dayStart = new Date(date + "T00:00:00");
+    const dayEnd = new Date(date + "T23:59:59");
 
-  const existingBookings = await prisma.booking.findMany({
-    where: {
+    const bookingWhere: Record<string, unknown> = {
       date: { gte: dayStart, lte: dayEnd },
-      status: "confirmed",
-    },
-  });
+      status: { in: ["confirmed", "pending_payment"] },
+    };
+    if (barberId) bookingWhere.barberId = barberId;
 
-  const hasConflict = existingBookings.some((b) => {
-    const bStart = timeToMinutes(b.startTime);
-    const bEnd = timeToMinutes(b.endTime);
-    return startMinutes < bEnd && endMinutes > bStart;
-  });
+    const existingBookings = await prisma.booking.findMany({
+      where: bookingWhere,
+    });
 
-  if (hasConflict) {
+    const hasConflict = existingBookings.some((b) => {
+      const bStart = timeToMinutes(b.startTime);
+      const bEnd = timeToMinutes(b.endTime);
+      return startMinutes < bEnd && endMinutes > bStart;
+    });
+
+    if (hasConflict) {
+      return NextResponse.json(
+        { error: "This time slot is no longer available. Please choose another." },
+        { status: 409 }
+      );
+    }
+
+    // Check for conflicts with blocked slots
+    const blockedSlots = await prisma.blockedSlot.findMany({
+      where: {
+        date: { gte: dayStart, lte: dayEnd },
+      },
+    });
+
+    const blockedConflict = blockedSlots.some((bs) => {
+      const bsStart = timeToMinutes(bs.startTime);
+      const bsEnd = timeToMinutes(bs.endTime);
+      return startMinutes < bsEnd && endMinutes > bsStart;
+    });
+
+    if (blockedConflict) {
+      return NextResponse.json(
+        { error: "This time slot is blocked. Please choose another." },
+        { status: 409 }
+      );
+    }
+
+    // Check if deposit is required
+    const settings = await prisma.settings.findUnique({ where: { id: "default" } });
+    const depositRequired = (settings?.depositRequired || 0) > 0;
+
+    // Create the booking
+    const booking = await prisma.booking.create({
+      data: {
+        clientName,
+        clientEmail,
+        clientPhone,
+        serviceId,
+        barberId: barberId || null,
+        date: dayStart,
+        startTime,
+        endTime,
+        notes: notes || null,
+        status: depositRequired ? "pending_payment" : "confirmed",
+      },
+      include: { service: true },
+    });
+
     return NextResponse.json(
-      { error: "This time slot is no longer available. Please choose another." },
-      { status: 409 }
+      { ...booking, depositRequired, depositAmount: settings?.depositRequired || 0 },
+      { status: 201 },
+    );
+  } catch (error) {
+    console.error("Booking creation failed:", error);
+    return NextResponse.json(
+      { error: "Failed to create booking" },
+      { status: 500 }
     );
   }
-
-  // Check for conflicts with blocked slots
-  const blockedSlots = await prisma.blockedSlot.findMany({
-    where: {
-      date: { gte: dayStart, lte: dayEnd },
-    },
-  });
-
-  const blockedConflict = blockedSlots.some((bs) => {
-    const bsStart = timeToMinutes(bs.startTime);
-    const bsEnd = timeToMinutes(bs.endTime);
-    return startMinutes < bsEnd && endMinutes > bsStart;
-  });
-
-  if (blockedConflict) {
-    return NextResponse.json(
-      { error: "This time slot is blocked. Please choose another." },
-      { status: 409 }
-    );
-  }
-
-  // Create the booking
-  const booking = await prisma.booking.create({
-    data: {
-      clientName,
-      clientEmail,
-      clientPhone,
-      serviceId,
-      date: dayStart,
-      startTime,
-      endTime,
-      notes: notes || null,
-      status: "confirmed",
-    },
-    include: { service: true },
-  });
-
-  return NextResponse.json(booking, { status: 201 });
 }

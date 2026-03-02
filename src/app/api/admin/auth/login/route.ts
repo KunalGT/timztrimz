@@ -1,17 +1,16 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getAdminToken } from "@/lib/admin-auth";
+import { verifyPin, generateAdminToken } from "@/lib/admin-auth";
 
 export async function POST(request: Request) {
   const { pin } = await request.json();
-  const expectedPin = process.env.ADMIN_PIN || "1234";
 
-  if (pin !== expectedPin) {
+  if (!verifyPin(pin)) {
     return NextResponse.json({ error: "Invalid PIN" }, { status: 401 });
   }
 
   const cookieStore = await cookies();
-  cookieStore.set("timztrimz_admin", getAdminToken(), {
+  cookieStore.set("timztrimz_admin", generateAdminToken(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

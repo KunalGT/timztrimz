@@ -88,12 +88,18 @@ export async function GET(request: NextRequest) {
   const dayStart = new Date(dateStr + "T00:00:00");
   const dayEnd = new Date(dateStr + "T23:59:59");
 
+  // Optional barber filter
+  const barberId = searchParams.get("barberId");
+
   // Fetch existing confirmed bookings for that date
+  const bookingWhere: Record<string, unknown> = {
+    date: { gte: dayStart, lte: dayEnd },
+    status: { in: ["confirmed", "pending_payment"] },
+  };
+  if (barberId) bookingWhere.barberId = barberId;
+
   const bookings = await prisma.booking.findMany({
-    where: {
-      date: { gte: dayStart, lte: dayEnd },
-      status: "confirmed",
-    },
+    where: bookingWhere,
   });
 
   // Fetch blocked slots for that date
